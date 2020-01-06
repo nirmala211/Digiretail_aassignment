@@ -3,7 +3,7 @@ import pandas as pd
 
 
 
-# change db credentials
+# change db credentials according to your db
 db_credentials = {
     'host' : "db4free.net",
     'user' : "nirmala",
@@ -51,38 +51,49 @@ def read_excel(file_name):
     return product_info, group_info
 
 def create_db():
+    """ creates db"""
     cursor.execute(db_create)
 
 def create_tables():
+    """ creates table"""
     cursor.execute(table_create_group)
     cursor.execute(table_create_product)
 
 def insert_into_db(dataframe, query):
+    """
+    Puts data into database
+    :param: dataframe
+        :param : query
+        :return none
+        """
     for col, row in dataframe.iterrows():
         cursor.execute(query.format(tuple(row)))
         print (tuple(row))
         connection.commit()
+
 def fetch_data_from_db(query):
+    """Fetches data from database
+    :param : query
+    :return : result
+    """
     cursor.execute(query)
     result = cursor.fetchall()
     return result
+
 def custom_print(data):
     for item in data:
         print(item)
 
-
-
 #RUN FILE
-# import pdb;pdb.set_trace()
 #create_db() #TODO: Uncomment only if  you haven't created db
 #create_tables() #TODO: Uncomment only if you haven't created tables
-# product_info, group_info = read_excel('beginner_assignment01.xlsx') # TODO
+# product_info, group_info = read_excel('beginner_assignment01.xlsx') # TODO uncomment to read data from excel file
 # insert Product data into db
 # insert_into_db(product_info, insert_product) #TODO: comment it once inserted
 # insert into group data into db
 # insert_into_db(group_info, insert_group) # TODO:comment it once inserted
 print (" >>>>>>>>>>>>>>>>>>>>>>>>> Product Info <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-custom_print (fetch_data_from_db(fetch_product))
+custom_print (fetch_data_from_db(fetch_product)) # TODO uncomment if data has been push to db
 print (" >>>>>>>>>>>>>>>>>>>>>>>>> Group Info <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-custom_print (fetch_data_from_db(fetch_group))
+custom_print (fetch_data_from_db(fetch_group))    # TODO uncomment if data has been push to db
 
