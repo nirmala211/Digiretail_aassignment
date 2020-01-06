@@ -5,6 +5,6 @@
 # python -Mysql :
    1- Change mysql credentials in mysql-excel file acording to your db;
    2- other information  has been  documented in file its self 
-#python elastic :
+# python elastic :
    1- Host local elastic server with default settings .
    2- Other information has been documented  in file itself .
